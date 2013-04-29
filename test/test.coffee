@@ -40,11 +40,38 @@ describe 'REST-Sessions Test', ->
 			return
 		return
 
-	it 'GET /TestApp/activity should return 200', (done) ->
+	it 'POST /TestApp/create/user2 should return 200 and a token', (done) ->
+		http.request().post('/TestApp/create/user2?ip=127.0.0.1').end (resp) ->
+			resp.statusCode.should.equal(200)
+			body = JSON.parse(resp.body)
+			token2 = body.token
+			token2.length.should.equal(64)
+			done()
+			return
+		return
+	
+	it 'GET /TestApp/get/{token} should return 200 and user2', (done) ->
+		http.request().get('/TestApp/get/' + token2).end (resp) ->
+			resp.statusCode.should.equal(200)
+			body = JSON.parse(resp.body)
+			body.id.should.equal('user2')
+			user2 = body
+			done()
+			return
+		return
+
+	it 'POST /TestApp/create/user2 create another session for user2', (done) ->
+		http.request().post('/TestApp/create/user2?ip=127.0.0.2').end (resp) ->
+			resp.statusCode.should.equal(200)
+			done()
+			return
+		return
+
+	it 'GET /TestApp/activity should return 200 and equal 2 even if we got 3 sessions', (done) ->
 		http.request().get('/TestApp/activity?dt=600').end (resp) ->
 			resp.statusCode.should.equal(200)
 			body = JSON.parse(resp.body)
-			body.activity.should.equal(1)
+			body.activity.should.equal(2)
 			done()
 			return
 		return
