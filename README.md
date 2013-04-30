@@ -148,3 +148,21 @@ Get a session for :app and :token
 
 Example:
 
+```
+GET /mywebapp/activity?dt=600
+```
+
+Response:
+
+```
+{"activity": 1}
+```
+
+### DELETE /:app/kill/:token
+
+Kill a single session of an app.
+
+
+
+
+

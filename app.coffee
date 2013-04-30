@@ -68,6 +68,14 @@ app.delete '/:app/killall', (req, res) ->
 		res.send(resp)
 		return
 
+app.delete '/:app/kill/:token', (req, res) ->
+	rs.kill {app: req.params.app, token: req.params.token}, (err, resp) ->
+		if err
+			res.send(err, 500)
+			return
+		res.send(resp)
+		return
+
 app.post '/:app/set/:token', (req, res) ->
 	rs.set {app: req.params.app, token: req.params.token, d: req.body}, (err, resp) ->
 		if err

@@ -89,6 +89,19 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     });
   });
 
+  app["delete"]('/:app/kill/:token', function(req, res) {
+    return rs.kill({
+      app: req.params.app,
+      token: req.params.token
+    }, function(err, resp) {
+      if (err) {
+        res.send(err, 500);
+        return;
+      }
+      res.send(resp);
+    });
+  });
+
   app.post('/:app/set/:token', function(req, res) {
     rs.set({
       app: req.params.app,
