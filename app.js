@@ -33,7 +33,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
   app.configure(function() {
     app.use(express.logger("dev"));
-    return app.use(express.bodyParser());
+    app.use(express.bodyParser());
   });
 
   app.get('/:app/activity', function(req, res) {

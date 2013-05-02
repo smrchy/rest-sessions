@@ -29,8 +29,8 @@ app.use (req, res, next) ->
 app.configure ->
 	app.use( express.logger("dev") )
 	app.use(express.bodyParser())
-
-
+	return
+	
 
 app.get '/:app/activity', (req, res) ->
 	rs.activity {app: req.params.app, dt: req.param("dt")}, (err, resp) ->

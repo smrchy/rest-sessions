@@ -7,11 +7,11 @@ A REST interface to handle and share sessions between different app server platf
 
 ## Installation
 
-`npm install rest-sessions`
-
-Run `npm install` to install the dependencies.
-
-For the test make sure Redis runs locally and run `npm test`
+* Clone this repository
+* Run `npm install` to install the dependencies.
+* For the test make sure Redis runs locally and run `npm test`
+* *Optional:* Modify the server port in server.js
+* Start the server: `node server.js`
 
 
 ## Methods
