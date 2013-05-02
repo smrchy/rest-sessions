@@ -36,7 +36,7 @@ Response:
 
 ```
 
-**Note:** You should save this token in a cookie and use it in subsequent requests to identify the user via the following `GET /:app/get/:token`
+**Note:** You should save this token in a cookie and use it in subsequent requests to identify the user via `GET /:app/get/:token`
 
 ### GET /:app/get/:token
 
@@ -158,11 +158,54 @@ Response:
 {"activity": 1}
 ```
 
+
 ### DELETE /:app/kill/:token
 
 Kill a single session of an app.
 
+Example:
+
+```
+DELETE /mywebapp/kill/KrxwdpUjoTQcYmMISjQE2C4drmXMhn5w2gX0388UySdPYoEJkPa74nhZhg3iaj7w
+```
+
+Response:
+
+```
+{"kill": 1}
+```
 
 
+### DELETE /:app/killsoid/:id
+
+A single unique user id might have multiple sessions on different devices and/or browsers. This methods kills all sessions of an id.
+
+Example:
+
+```
+DELETE /mywebapp/killsoid/user123
+```
+
+Response:
+
+```
+{"kill": 3}
+```
 
 
+### DELETE /:app/killall
+
+Kills all sessions of an app.
+
+
+Example:
+
+```
+DELETE /mywebapp/killall
+```
+
+Response:
+
+```
+{"kill": 42}
+```

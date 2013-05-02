@@ -31,7 +31,6 @@ app.configure ->
 	app.use(express.bodyParser())
 
 
-# acitivity(app, dt)
 
 app.get '/:app/activity', (req, res) ->
 	rs.activity {app: req.params.app, dt: req.param("dt")}, (err, resp) ->
@@ -42,6 +41,7 @@ app.get '/:app/activity', (req, res) ->
 		return
 	return
 
+
 app.post '/:app/create/:id', (req, res) ->
 	rs.create {app: req.params.app, id: req.params.id, ttl: req.param('ttl'), ip: req.param('ip')}, (err, resp) ->
 		if err
@@ -50,6 +50,7 @@ app.post '/:app/create/:id', (req, res) ->
 		res.send(resp)
 		return
 	return
+
 
 app.get '/:app/get/:token', (req, res) ->
 	rs.get {app: req.params.app, token: req.params.token}, (err, resp) ->
@@ -60,21 +61,6 @@ app.get '/:app/get/:token', (req, res) ->
 		return
 	return
 
-app.delete '/:app/killall', (req, res) ->
-	rs.killall {app: req.params.app}, (err, resp) ->
-		if err
-			res.send(err, 500)
-			return
-		res.send(resp)
-		return
-
-app.delete '/:app/kill/:token', (req, res) ->
-	rs.kill {app: req.params.app, token: req.params.token}, (err, resp) ->
-		if err
-			res.send(err, 500)
-			return
-		res.send(resp)
-		return
 
 app.post '/:app/set/:token', (req, res) ->
 	rs.set {app: req.params.app, token: req.params.token, d: req.body}, (err, resp) ->
@@ -84,6 +70,44 @@ app.post '/:app/set/:token', (req, res) ->
 		res.send(resp)
 		return
 	return
+
+app.get '/:app/soid/:id', (req, res) ->
+	rs.soid {app: req.params.app, id: req.params.id}, (err, resp) ->
+		if err
+			res.send(err, 500)
+			return
+		res.send(resp)
+		return
+	return
+
+app.delete '/:app/kill/:token', (req, res) ->
+	rs.kill {app: req.params.app, token: req.params.token}, (err, resp) ->
+		if err
+			res.send(err, 500)
+			return
+		res.send(resp)
+		return
+
+
+app.delete '/:app/killsoid/:id', (req, res) ->
+	rs.killsoid {app: req.params.app, id: req.params.id}, (err, resp) ->
+		if err
+			res.send(err, 500)
+			return
+		res.send(resp)
+		return
+
+
+app.delete '/:app/killall', (req, res) ->
+	rs.killall {app: req.params.app}, (err, resp) ->
+		if err
+			res.send(err, 500)
+			return
+		res.send(resp)
+		return
+
+
+
 
 	return
 

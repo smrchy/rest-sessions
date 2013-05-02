@@ -77,9 +77,24 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     });
   });
 
-  app["delete"]('/:app/killall', function(req, res) {
-    return rs.killall({
-      app: req.params.app
+  app.post('/:app/set/:token', function(req, res) {
+    rs.set({
+      app: req.params.app,
+      token: req.params.token,
+      d: req.body
+    }, function(err, resp) {
+      if (err) {
+        res.send(err, 500);
+        return;
+      }
+      res.send(resp);
+    });
+  });
+
+  app.get('/:app/soid/:id', function(req, res) {
+    rs.soid({
+      app: req.params.app,
+      id: req.params.id
     }, function(err, resp) {
       if (err) {
         res.send(err, 500);
@@ -102,11 +117,10 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     });
   });
 
-  app.post('/:app/set/:token', function(req, res) {
-    rs.set({
+  app["delete"]('/:app/killsoid/:id', function(req, res) {
+    return rs.killsoid({
       app: req.params.app,
-      token: req.params.token,
-      d: req.body
+      id: req.params.id
     }, function(err, resp) {
       if (err) {
         res.send(err, 500);
@@ -114,7 +128,18 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
       }
       res.send(resp);
     });
-    return;
+  });
+
+  app["delete"]('/:app/killall', function(req, res) {
+    rs.killall({
+      app: req.params.app
+    }, function(err, resp) {
+      if (err) {
+        res.send(err, 500);
+        return;
+      }
+      res.send(resp);
+    });
   });
 
   module.exports = app;
