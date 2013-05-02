@@ -26,7 +26,7 @@
     user1 = null;
     user2 = null;
     it('POST /TestApp/create/user1 should return 200 and a token', function(done) {
-      http.request().post('/TestApp/create/user1?ip=127.0.0.1').end(function(resp) {
+      http.request().put('/TestApp/create/user1?ip=127.0.0.1').end(function(resp) {
         var body;
 
         resp.statusCode.should.equal(200);
@@ -47,8 +47,8 @@
         done();
       });
     });
-    it('POST /TestApp/create/user2 should return 200 and a token', function(done) {
-      http.request().post('/TestApp/create/user2?ip=127.0.0.1').end(function(resp) {
+    it('PUT /TestApp/create/user2 should return 200 and a token', function(done) {
+      http.request().put('/TestApp/create/user2?ip=127.0.0.1').end(function(resp) {
         var body;
 
         resp.statusCode.should.equal(200);
@@ -111,8 +111,8 @@
         done();
       });
     });
-    it('POST /TestApp/create/user2 should return 200 and a token', function(done) {
-      http.request().post('/TestApp/create/user2?ip=127.0.0.1').end(function(resp) {
+    it('PUT /TestApp/create/user2 should return 200 and a token', function(done) {
+      http.request().put('/TestApp/create/user2?ip=127.0.0.1').end(function(resp) {
         var body;
 
         resp.statusCode.should.equal(200);
@@ -133,8 +133,8 @@
         done();
       });
     });
-    it('POST /TestApp/create/user2 create another session for user2', function(done) {
-      http.request().post('/TestApp/create/user2?ip=127.0.0.2').end(function(resp) {
+    it('PUT /TestApp/create/user2 create another session for user2', function(done) {
+      http.request().put('/TestApp/create/user2?ip=127.0.0.2').end(function(resp) {
         resp.statusCode.should.equal(200);
         done();
       });

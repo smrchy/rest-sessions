@@ -30,7 +30,7 @@ app.configure ->
 	app.use( express.logger("dev") )
 	app.use(express.bodyParser())
 	return
-	
+
 
 app.get '/:app/activity', (req, res) ->
 	rs.activity {app: req.params.app, dt: req.param("dt")}, (err, resp) ->
@@ -42,7 +42,7 @@ app.get '/:app/activity', (req, res) ->
 	return
 
 
-app.post '/:app/create/:id', (req, res) ->
+app.put '/:app/create/:id', (req, res) ->
 	rs.create {app: req.params.app, id: req.params.id, ttl: req.param('ttl'), ip: req.param('ip')}, (err, resp) ->
 		if err
 			res.send(err, 500)

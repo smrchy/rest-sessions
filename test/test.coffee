@@ -21,7 +21,7 @@ describe 'REST-Sessions Test', ->
 	user2 = null
 
 	it 'POST /TestApp/create/user1 should return 200 and a token', (done) ->
-		http.request().post('/TestApp/create/user1?ip=127.0.0.1').end (resp) ->
+		http.request().put('/TestApp/create/user1?ip=127.0.0.1').end (resp) ->
 			resp.statusCode.should.equal(200)
 			body = JSON.parse(resp.body)
 			token1 = body.token
@@ -40,8 +40,8 @@ describe 'REST-Sessions Test', ->
 			return
 		return
 
-	it 'POST /TestApp/create/user2 should return 200 and a token', (done) ->
-		http.request().post('/TestApp/create/user2?ip=127.0.0.1').end (resp) ->
+	it 'PUT /TestApp/create/user2 should return 200 and a token', (done) ->
+		http.request().put('/TestApp/create/user2?ip=127.0.0.1').end (resp) ->
 			resp.statusCode.should.equal(200)
 			body = JSON.parse(resp.body)
 			token2 = body.token
@@ -98,8 +98,8 @@ describe 'REST-Sessions Test', ->
 			return
 		return
 
-	it 'POST /TestApp/create/user2 should return 200 and a token', (done) ->
-		http.request().post('/TestApp/create/user2?ip=127.0.0.1').end (resp) ->
+	it 'PUT /TestApp/create/user2 should return 200 and a token', (done) ->
+		http.request().put('/TestApp/create/user2?ip=127.0.0.1').end (resp) ->
 			resp.statusCode.should.equal(200)
 			body = JSON.parse(resp.body)
 			token2 = body.token
@@ -119,8 +119,8 @@ describe 'REST-Sessions Test', ->
 		return
 
 
-	it 'POST /TestApp/create/user2 create another session for user2', (done) ->
-		http.request().post('/TestApp/create/user2?ip=127.0.0.2').end (resp) ->
+	it 'PUT /TestApp/create/user2 create another session for user2', (done) ->
+		http.request().put('/TestApp/create/user2?ip=127.0.0.2').end (resp) ->
 			resp.statusCode.should.equal(200)
 			done()
 			return

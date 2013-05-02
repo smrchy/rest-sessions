@@ -49,7 +49,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     });
   });
 
-  app.post('/:app/create/:id', function(req, res) {
+  app.put('/:app/create/:id', function(req, res) {
     rs.create({
       app: req.params.app,
       id: req.params.id,
