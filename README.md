@@ -16,7 +16,7 @@ A REST interface to handle and share sessions between different app server platf
 
 ## Methods
 
-### POST /:app/create/:id
+### PUT /:app/create/:id
 
 Create a session for :app and user :id
 
@@ -28,7 +28,7 @@ Parameters:
 Example:
 
 ```
-POST /mywebapp/create/user123?ip=192.168.99.22&ttl=86400
+PUT /mywebapp/create/user123?ip=192.168.99.22&ttl=86400
 ```
 
 Response:
