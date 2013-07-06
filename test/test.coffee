@@ -135,6 +135,15 @@ describe 'REST-Sessions Test', ->
 			return
 		return
 
+	it 'GET /TestApp/soapp should return 200 and 3 sessions', (done) ->
+		http.request().get('/TestApp/soapp?dt=600').end (resp) ->
+			resp.statusCode.should.equal(200)
+			body = JSON.parse(resp.body)
+			body.sessions.length.should.equal(3)
+			done()
+			return
+		return
+
 	it 'GET /TestApp/soid/user2 should return 200 and 2 sessions', (done) ->
 		http.request().get('/TestApp/soid/'+ user2.id).end (resp) ->
 			resp.statusCode.should.equal(200)

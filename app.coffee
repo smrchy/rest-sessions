@@ -71,6 +71,15 @@ app.post '/:app/set/:token', (req, res) ->
 		return
 	return
 
+app.get '/:app/soapp', (req, res) ->
+	rs.soapp {app: req.params.app, dt: req.param("dt")}, (err, resp) ->
+		if err
+			res.send(err, 500)
+			return
+		res.send(resp)
+		return
+	return
+
 app.get '/:app/soid/:id', (req, res) ->
 	rs.soid {app: req.params.app, id: req.params.id}, (err, resp) ->
 		if err
