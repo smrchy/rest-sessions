@@ -146,8 +146,6 @@ Parameters:
 
 * `dt` Delta time. Amount of seconds to check (e.g. 600 for the last 10 min.)
 
-Get a session for :app and :token
-
 Example:
 
 ```
@@ -158,6 +156,86 @@ Response:
 
 ```
 {"activity": 1}
+```
+
+
+### GET /:app/soapp
+
+Get all sessions of an app that were active within the last *n* seconds
+
+Parameters:
+
+* `dt` Delta time. Amount of seconds to check (e.g. 600 for the last 10 min.)
+
+Example:
+
+```
+GET /mywebapp/soapp?dt=600
+```
+
+Response:
+
+```
+{"sessions":
+    [
+        {
+            "id": "user123",
+            "r": 1,
+            "w": 3,
+            "ttl": 86400,
+            "idle": 17,
+            "ip": "192.168.99.22",
+            "d": {
+                "name": "Bruce Dickinson",
+                "age": 46,
+                "job": "making gold records"
+            }
+        },
+        {
+            "id": "user456",
+            "r": 4,
+            "w": 3,
+            "ttl": 86400,
+            "idle": 217,
+            "ip": "192.168.99.25"
+        }
+    ]
+}
+```
+
+### GET /:app/soid/:id
+
+Get all sessions of a single id within an app.
+
+Example:
+
+```
+GET /mywebapp/soid/user456
+```
+
+Response:
+
+```
+{"sessions":
+    [
+        {
+            "id": "user456",
+            "r": 4,
+            "w": 3,
+            "ttl": 86400,
+            "idle": 217,
+            "ip": "192.168.99.25"
+        },
+        {
+            "id": "user456",
+            "r": 42,
+            "w": 31,
+            "ttl": 86400,
+            "idle": 23107,
+            "ip": "10.0.2.45"
+        }
+    ]
+}
 ```
 
 
