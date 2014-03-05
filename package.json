@@ -1,7 +1,7 @@
 {
     "name": "rest-sessions",
     "description": "A REST interface for redis-sessions",
-    "version": "0.0.4",
+    "version": "0.0.6",
     "author": "P. Liess <smrchy+npm@gmail.com>",
     "engines": {
 		"node": "> 0.8.10"
@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"redis-sessions": "*",
-		"express": "*",
+		"express": "<4.0",
 		"underscore": "*"
 	},
 	"devDependencies": {
