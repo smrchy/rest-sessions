@@ -2,7 +2,7 @@
 (function() {
   var app, async, http, should, _;
 
-  _ = require("underscore");
+  _ = require("lodash");
 
   should = require("should");
 
@@ -24,7 +24,7 @@
     token2 = null;
     user1 = null;
     user2 = null;
-    it('POST /TestApp/create/user1 should return 200 and a token', function(done) {
+    it('PUT /TestApp/create/user1 should return 200 and a token', function(done) {
       http.request().put('/TestApp/create/user1?ip=127.0.0.1').end(function(resp) {
         var body;
         resp.statusCode.should.equal(200);

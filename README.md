@@ -1,7 +1,9 @@
-# REST Sessions
+# REST-Sessions
 
-[![Build Status](https://secure.travis-ci.org/smrchy/rest-sessions.png?branch=master)](http://travis-ci.org/smrchy/rest-sessions)
+[![Build Status](https://secure.travis-ci.org/smrchy/rest-sessions.svg?branch=master)](http://travis-ci.org/smrchy/rest-sessions)
+[![Dependency Status](https://david-dm.org/smrchy/rest-sessions.svg)](https://david-dm.org/smrchy/rest-sessions)
 
+[![REST-Sessions](https://nodei.co/npm/rest-sessions.png?downloads=true&stars=true)](https://nodei.co/npm/rest-sessions/)
 
 A REST interface to handle and share sessions between different app server platforms. Based on [redis-sessions](https://github.com/smrchy/redis-sessions).
 

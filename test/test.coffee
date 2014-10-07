@@ -1,4 +1,4 @@
-_ = require "underscore"
+_ = require "lodash"
 should = require "should"
 async = require "async"
 app = require "../app"

@@ -10,9 +10,9 @@
 		"test": "mocha ./test/test.js"
 	},
 	"dependencies": {
-		"redis-sessions": "*",
+		"redis-sessions": "0.3.7",
 		"express": "<4.0",
-		"underscore": "*"
+		"lodash": "2.4.1"
 	},
 	"devDependencies": {
 		"mocha": "*",
@@ -32,7 +32,8 @@
 		"coldfusion",
 		"asp",
 		".net",
-		"python"
+		"python",
+		"ruby"
 	],
 	"repository" : {
 		"type": "git",
