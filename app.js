@@ -4,7 +4,7 @@ Rest Sessions
 
 The MIT License (MIT)
 
-Copyright © 2013 Patrick Liess, http://www.tcs.de
+Copyright © 2014 Patrick Liess, http://www.tcs.de
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -15,38 +15,48 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 
 (function() {
-  var RedisSessions, app, express, rs;
+  var RedisSessions, app, bodyParser, config, express, morgan, rs, _, _respond;
+
+  config = require("./config.json");
 
   RedisSessions = require("redis-sessions");
 
-  rs = new RedisSessions();
+  rs = new RedisSessions({
+    host: config.redishost,
+    port: config.redisport
+  });
 
-  express = require('express');
+  _ = require("lodash");
+
+  express = require("express");
+
+  morgan = require("morgan");
+
+  bodyParser = require("body-parser");
 
   app = express();
 
-  app.use(function(req, res, next) {
+  app.use(morgan('dev'));
+
+  app.use(bodyParser.json({
+    limit: 60000
+  }));
+
+  _respond = function(res, err, resp) {
     res.header('Content-Type', "application/json");
     res.removeHeader("X-Powered-By");
-    next();
-  });
-
-  app.configure(function() {
-    app.use(express.logger("dev"));
-    app.use(express.bodyParser());
-  });
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    res.send(resp);
+  };
 
   app.get('/:app/activity', function(req, res) {
     rs.activity({
       app: req.params.app,
       dt: req.param("dt")
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app.put('/:app/create/:id', function(req, res) {
@@ -55,26 +65,14 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
       id: req.params.id,
       ttl: req.param('ttl'),
       ip: req.param('ip')
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app.get('/:app/get/:token', function(req, res) {
     rs.get({
       app: req.params.app,
       token: req.params.token
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app.post('/:app/set/:token', function(req, res) {
@@ -82,77 +80,41 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
       app: req.params.app,
       token: req.params.token,
       d: req.body
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app.get('/:app/soapp', function(req, res) {
     rs.soapp({
       app: req.params.app,
       dt: req.param("dt")
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app.get('/:app/soid/:id', function(req, res) {
     rs.soid({
       app: req.params.app,
       id: req.params.id
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app["delete"]('/:app/kill/:token', function(req, res) {
-    return rs.kill({
+    rs.kill({
       app: req.params.app,
       token: req.params.token
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app["delete"]('/:app/killsoid/:id', function(req, res) {
-    return rs.killsoid({
+    rs.killsoid({
       app: req.params.app,
       id: req.params.id
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   app["delete"]('/:app/killall', function(req, res) {
     rs.killall({
       app: req.params.app
-    }, function(err, resp) {
-      if (err) {
-        res.send(err, 500);
-        return;
-      }
-      res.send(resp);
-    });
+    }, _.partial(_respond, res));
   });
 
   module.exports = app;
