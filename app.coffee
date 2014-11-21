@@ -36,7 +36,10 @@ app.get '/:app/activity', (req, res) ->
 	return
 
 app.put '/:app/create/:id', (req, res) ->
-	rs.create {app: req.params.app, id: req.params.id, ttl: req.param('ttl'), ip: req.param('ip')},  _.partial(_respond, res)
+	params = {app: req.params.app, id: req.params.id, ttl: req.param('ttl'), ip: req.param('ip')}
+	if _.keys(req.body).length
+		params = _.extend(params, {d: req.body})
+	rs.create params, _.partial(_respond, res)
 	return
 
 app.get '/:app/get/:token', (req, res) ->

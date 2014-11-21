@@ -60,12 +60,19 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   });
 
   app.put('/:app/create/:id', function(req, res) {
-    rs.create({
+    var params;
+    params = {
       app: req.params.app,
       id: req.params.id,
       ttl: req.param('ttl'),
       ip: req.param('ip')
-    }, _.partial(_respond, res));
+    };
+    if (_.keys(req.body).length) {
+      params = _.extend(params, {
+        d: req.body
+      });
+    }
+    rs.create(params, _.partial(_respond, res));
   });
 
   app.get('/:app/get/:token', function(req, res) {

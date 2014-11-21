@@ -25,7 +25,9 @@
     user1 = null;
     user2 = null;
     it('PUT /TestApp/create/user1 should return 200 and a token', function(done) {
-      http.request().put('/TestApp/create/user1?ip=127.0.0.1').end(function(resp) {
+      http.request().put('/TestApp/create/user1?ip=127.0.0.1').set('Content-Type', 'application/json').write(JSON.stringify({
+        blarg: "foo"
+      })).end(function(resp) {
         var body;
         resp.statusCode.should.equal(200);
         body = JSON.parse(resp.body);
@@ -39,6 +41,7 @@
         var body;
         resp.statusCode.should.equal(200);
         body = JSON.parse(resp.body);
+        body.d.blarg.should.equal('foo');
         body.id.should.equal('user1');
         user1 = body;
         done();

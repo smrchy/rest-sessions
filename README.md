@@ -41,6 +41,7 @@ Response:
 ```
 
 **Note:** You should save this token in a cookie and use it in subsequent requests to identify the user via `GET /:app/get/:token`
+If might use the put request to add additional paramenters to the session. Just supply them in the body (see the POST request) and set the Content-Type to `application/json`.
 
 ### GET /:app/get/:token
 
