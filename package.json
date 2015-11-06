@@ -1,7 +1,7 @@
 {
     "name": "rest-sessions",
     "description": "A REST interface for redis-sessions",
-    "version": "0.2.2",
+    "version": "0.3.1",
     "author": "P. Liess <smrchy+npm@gmail.com>",
     "engines": {
 		"node": "> 0.10.20"
@@ -10,11 +10,11 @@
 		"test": "mocha ./test/test.js"
 	},
 	"dependencies": {
-		"redis-sessions": "0.5.1",
-		"express": "4.13.x",
-		"lodash": "*",
-		"morgan": "*",
-		"body-parser": "*"
+		"redis-sessions": "0.5.2",
+		"express": "4.13.3",
+		"lodash": "3.10.1",
+		"morgan": "1.6.1",
+		"body-parser": "1.14.1"
 	},
 	"devDependencies": {
 		"mocha": "*",
