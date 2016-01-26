@@ -10,11 +10,11 @@
 		"test": "mocha ./test/test.js"
 	},
 	"dependencies": {
-		"redis-sessions": "0.5.2",
-		"express": "4.13.3",
-		"lodash": "3.10.1",
+		"redis-sessions": "1.0.0",
+		"express": "4.13.4",
+		"lodash": "4.x",
 		"morgan": "1.6.1",
-		"body-parser": "1.14.1"
+		"body-parser": "1.14.2"
 	},
 	"devDependencies": {
 		"mocha": "*",

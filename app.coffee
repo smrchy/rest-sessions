@@ -12,14 +12,22 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ###
 config = require "./config.json"
+
+redisconfig =
+	host: process.env.RS_REDISHOST or "127.0.0.1"
+	port: parseInt(process.env.RS_REDISPORT or 6379, 10)
+loglevel = process.env.RS_LOGLEVEL or "dev"
+
 RedisSessions = require "redis-sessions"
-rs = new RedisSessions({host: config.redishost, port: config.redisport})
+
+rs = new RedisSessions(redisconfig)
 _ = require "lodash"
 express = require "express"
-morgan = require "morgan"
 bodyParser = require "body-parser"
 app = express()
-app.use(morgan('dev'))
+if loglevel isnt "none"
+	morgan = require "morgan"
+	app.use(morgan(loglevel))
 app.use(bodyParser.json({limit:60000}))
 
 _respond = (res, err, resp) ->
@@ -32,11 +40,11 @@ _respond = (res, err, resp) ->
 	return
 
 app.get '/:app/activity', (req, res) ->
-	rs.activity {app: req.params.app, dt: req.param("dt")}, _.partial(_respond, res)
+	rs.activity {app: req.params.app, dt: req.query.dt}, _.partial(_respond, res)
 	return
 
 app.put '/:app/create/:id', (req, res) ->
-	params = {app: req.params.app, id: req.params.id, ttl: req.param('ttl'), ip: req.param('ip')}
+	params = {app: req.params.app, id: req.params.id, ttl: req.query.ttl, ip: req.query.ip}
 	if _.keys(req.body).length
 		params = _.extend(params, {d: req.body})
 	rs.create params, _.partial(_respond, res)
@@ -51,7 +59,7 @@ app.post '/:app/set/:token', (req, res) ->
 	return
 
 app.get '/:app/soapp', (req, res) ->
-	rs.soapp {app: req.params.app, dt: req.param("dt")},  _.partial(_respond, res)
+	rs.soapp {app: req.params.app, dt: req.query.dt},  _.partial(_respond, res)
 	return
 
 app.get '/:app/soid/:id', (req, res) ->
