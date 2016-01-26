@@ -9,6 +9,9 @@
 	"scripts": {
 		"test": "mocha ./test/test.js"
 	},
+	"bin": {
+		"rest-sessions": "./bin/rest-sessions.js"
+	},
 	"dependencies": {
 		"redis-sessions": "1.0.0",
 		"express": "4.13.4",
