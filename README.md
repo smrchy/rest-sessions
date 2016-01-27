@@ -9,11 +9,22 @@ A REST interface to handle and share sessions between different app server platf
 
 ## Installation
 
-* Clone this repository
-* Run `npm install` to install the dependencies.
-* For the test make sure Redis runs locally and run `npm test`
-* *Optional:* Modify the server port in server.js
-* Start the server: `node server.js`
+* `npm i -g rest-sessions`
+
+## via Docker
+
+https://hub.docker.com/r/smrchy/docker-rest-sessions/
+
+
+## Configuration
+
+Use the following environment variables to set the listening port and Redis host and port:
+
+* RS_PORT
+* RS_REDISHOST
+* RS_REDISPORT
+* RS_NAMESPACE (Redis namespace prefix: defaults to `drs`)
+* RS_LOGLEVEL (a morgan loglevel or `none` to disable logging)
 
 
 ## Methods
