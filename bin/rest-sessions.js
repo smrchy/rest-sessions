@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --max-old-space-size=32
 
 var path = require('path');
 var fs   = require('fs');
