@@ -1,49 +1,48 @@
 {
-	"name": "rest-sessions",
-	"description": "A REST interface for redis-sessions",
-	"version": "1.0.10",
-	"license": "MIT",
-	"author": "P. Liess <smrchy+npm@gmail.com>",
-	"engines": {
-		"node": "> 0.10.20"
-	},
-	"scripts": {
-		"test": "mocha ./test/test.js"
-	},
-	"bin": {
-		"rest-sessions": "./bin/rest-sessions.js"
-	},
-	"dependencies": {
-		"redis-sessions": "^1.1",
-		"express": "4.13.4",
-		"lodash": "^4.x",
-		"morgan": "^1.6.1",
-		"body-parser": "^1.14.2"
-	},
-	"devDependencies": {
-		"mocha": "*",
-		"should": "*",
-		"async": "*"
-	},
-	"keywords": [
-		"rest",
-		"http",
-		"cookies",
-		"sessions",
-		"redis",
-		"session",
-		"users",
-		"activity",
-		"php",
-		"coldfusion",
-		"asp",
-		".net",
-		"python",
-		"ruby"
-	],
-	"repository" : {
-		"type": "git",
-		"url": "http://github.com/smrchy/rest-sessions.git"
-	}
-
+  "name": "rest-sessions",
+  "description": "A REST interface for redis-sessions",
+  "version": "1.1.0",
+  "license": "MIT",
+  "author": "P. Liess <smrchy+npm@gmail.com>",
+  "engines": {
+    "node": "> 0.10.20"
+  },
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "bin": {
+    "rest-sessions": "./bin/rest-sessions.js"
+  },
+  "dependencies": {
+    "redis-sessions": "^1.1",
+    "express": "4.13.4",
+    "lodash": "^4.x",
+    "morgan": "^1.6.1",
+    "body-parser": "^1.14.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "async": "*"
+  },
+  "keywords": [
+    "rest",
+    "http",
+    "cookies",
+    "sessions",
+    "redis",
+    "session",
+    "users",
+    "activity",
+    "php",
+    "coldfusion",
+    "asp",
+    ".net",
+    "python",
+    "ruby"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/smrchy/rest-sessions.git"
+  }
 }
