@@ -304,11 +304,19 @@ Response:
 {"kill": 42}
 ```
 
+### GET /ping
+
+Pings the redis server and returns 
+
+```
+PONG
+```
+
 ## License 
 
 (The MIT License)
 
-Copyright (c) 2010 TCS &lt;dev (at) tcs.de&gt;
+Copyright (c) 2010-2016 TCS &lt;dev (at) tcs.de&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

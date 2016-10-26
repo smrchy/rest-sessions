@@ -20,6 +20,15 @@ describe 'REST-Sessions Test', ->
 	user1 = null
 	user2 = null
 
+	it 'GET /ping should return 200 and "PONG"', (done) ->
+		http.request().get('/ping').end (resp) ->
+			resp.statusCode.should.equal(200)
+			body = resp.body
+			body.should.equal('PONG')
+			done()
+			return
+		return
+
 	it 'PUT /TestApp/create/user1 should return 200 and a token', (done) ->
 		http.request().put('/TestApp/create/user1?ip=127.0.0.1')
 		.set('Content-Type','application/json')
@@ -116,7 +125,7 @@ describe 'REST-Sessions Test', ->
 		http.request().get('/TestApp/get/' + token2).end (resp) ->
 			resp.statusCode.should.equal(200)
 			body = JSON.parse(resp.body)
-			body.should.not.have.keys('id')
+			body.should.have.keys('id')
 			user2 = body
 			done()
 			return

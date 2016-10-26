@@ -32,7 +32,6 @@ app.use(bodyParser.json({limit:60000}))
 
 _respond = (res, err, resp) ->
 	res.header('Content-Type', "application/json")
-	res.removeHeader("X-Powered-By")
 	if err
 		res.status(500).send(err)
 		return
@@ -76,6 +75,10 @@ app.delete '/:app/killsoid/:id', (req, res) ->
 
 app.delete '/:app/killall', (req, res) ->
 	rs.killall {app: req.params.app},  _.partial(_respond, res)
+	return
+
+app.get '/ping', (req, res) ->
+	rs.ping _.partial(_respond, res)
 	return
 
 module.exports = app
