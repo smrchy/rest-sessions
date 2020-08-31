@@ -8,7 +8,7 @@
     "node": "> 10"
   },
   "scripts": {
-    "build": "coffee -bc *.coffee",
+    "build": "coffee -bc *.coffee && coffee -bc ./test/test.coffee",
     "test": "mocha ./test/test.js"
   },
   "bin": {

@@ -8,11 +8,12 @@ http = require "../test/support/http"
 describe 'REST-Sessions Test', ->
 
 	before (done) ->
-		http.createServer(app,done)
+		http.createServer(app, done)
 		return
 
 	after (done) ->
-		done()		
+		done()
+		process.exit(0)
 		return
 
 	token1 = null
@@ -31,7 +32,7 @@ describe 'REST-Sessions Test', ->
 
 	it 'PUT /TestApp/create/user1 should return 200 and a token', (done) ->
 		http.request().put('/TestApp/create/user1?ip=127.0.0.1')
-		.set('Content-Type','application/json')
+		.set('Content-Type', 'application/json')
 		.write(JSON.stringify({ blarg: "foo" }))
 		.end (resp) ->
 			resp.statusCode.should.equal(200)
@@ -75,8 +76,8 @@ describe 'REST-Sessions Test', ->
 
 	it 'POST /TestApp/set/{token} set some data', (done) ->
 		http.request().post('/TestApp/set/' + token1)
-			.set('Content-Type','application/json')
-			.write(JSON.stringify({ somebool: true, account: 120.55, name:"Peter Smith" }))
+			.set('Content-Type', 'application/json')
+			.write(JSON.stringify({ somebool: true, account: 120.55, name: "Peter Smith" }))
 			.end (resp) ->
 				resp.statusCode.should.equal(200)
 				body = JSON.parse(resp.body)
@@ -89,7 +90,7 @@ describe 'REST-Sessions Test', ->
 		return
 
 	it 'DELETE /TestApp/kill should return 200 ', (done) ->
-		http.request().delete('/TestApp/kill/' + token2).expect(200,done)
+		http.request().delete('/TestApp/kill/' + token2).expect(200, done)
 		return
 
 	it 'GET /TestApp/activity should return 200 and 1 session', (done) ->
@@ -158,7 +159,7 @@ describe 'REST-Sessions Test', ->
 		return
 
 	it 'GET /TestApp/soid/user2 should return 200 and 2 sessions', (done) ->
-		http.request().get('/TestApp/soid/'+ user2.id).end (resp) ->
+		http.request().get('/TestApp/soid/' + user2.id).end (resp) ->
 			resp.statusCode.should.equal(200)
 			body = JSON.parse(resp.body)
 			body.sessions.length.should.equal(2)
@@ -168,7 +169,7 @@ describe 'REST-Sessions Test', ->
 
 
 	it 'DELETE /TestApp/killsoid/user2 should return 200 ', (done) ->
-		http.request().delete('/TestApp/killsoid/' + user2.id).expect(200,done)
+		http.request().delete('/TestApp/killsoid/' + user2.id).expect(200, done)
 		return
 
 	it 'GET /TestApp/activity should return 200 and equal 1', (done) ->
@@ -182,7 +183,7 @@ describe 'REST-Sessions Test', ->
 
 
 	it 'DELETE /TestApp/killall should return 200 ', (done) ->
-		http.request().delete('/TestApp/killall').expect(200,done)
+		http.request().delete('/TestApp/killall').expect(200, done)
 		return
 	
 
