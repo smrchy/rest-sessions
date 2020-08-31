@@ -3,7 +3,7 @@ Rest Sessions
 
 The MIT License (MIT)
 
-Copyright © 2014-2016 Patrick Liess, http://www.tcs.de
+Copyright © 2014-2020 Patrick Liess, http://www.tcs.de
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -27,7 +27,11 @@ bodyParser = require "body-parser"
 app = express()
 if loglevel isnt "none"
 	morgan = require "morgan"
-	app.use(morgan(loglevel))
+	morgan_logmode = if process.env.NODE_ENV is "production" then "combined" else "dev"
+	app.use(morgan(morgan_logmode, {
+		skip: (req, res) ->
+			return req.url is "/ping"
+	}))
 app.use(bodyParser.json({limit:60000}))
 
 _respond = (res, err, resp) ->
