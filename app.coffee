@@ -17,6 +17,12 @@ redisconfig =
 	port: parseInt(process.env.RS_REDISPORT or 6379, 10)
 	namespace: process.env.RS_NAMESPACE or "rs"
 loglevel = process.env.RS_LOGLEVEL or "dev"
+if process.env.RS_REDISURL
+  redisconfig =
+    namespace: process.env.RS_NAMESPACE or "rs"
+    options:
+      url: process.env.RS_REDISURL
+
 
 RedisSessions = require "redis-sessions"
 

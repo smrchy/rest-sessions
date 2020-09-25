@@ -22,6 +22,15 @@ redisconfig = {
 
 loglevel = process.env.RS_LOGLEVEL || "dev";
 
+if (process.env.RS_REDISURL) {
+  redisconfig = {
+    namespace: process.env.RS_NAMESPACE || "rs",
+    options: {
+      url: process.env.RS_REDISURL
+    }
+  };
+}
+
 RedisSessions = require("redis-sessions");
 
 rs = new RedisSessions(redisconfig);
